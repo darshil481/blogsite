@@ -1,21 +1,18 @@
 import { Router } from "express";
-import { Routes } from "../../Interface/routes.interface"
-import validationMiddleware from '../../Middlewares/validation.middleware';
-import {RegisterSchema} from '../../Validations/auth.validationSchema'
-import { AuthController } from '../Controller/auth.controller';
-import { AuthService } from "../Services/auth.service";
+import { Routes } from "../../Interface/routes.interface"; 
+import { AuthController } from "../Controller/auth.controller";
 
 
 class AuthRoute implements Routes{
     public path = "/auth"
     public router = Router();
-    public authController = new AuthController(new AuthService());
+    public authController = new AuthController();
 
     constructor() {
         this.initializeRoutes();
     }
     private initializeRoutes(){
-        this.router.post(`${this.path}/register`, validationMiddleware(RegisterSchema, 'body'), this.authController.register);
+        this.router.post(`${this.path}/register`,this.authController.register);
     }
 
 }

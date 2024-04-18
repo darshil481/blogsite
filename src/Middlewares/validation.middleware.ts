@@ -15,7 +15,7 @@ interface Error {
 const validationMiddleware = (type: any, value: string | 'body' | 'query' | 'params' = 'body'): RequestHandler => {
     return async (req:any, res, next) => {
       try {
-        console.log("====================>")
+       
         cleanObj(req[value]);
         await type.validateAsync(req[value]);
         next();
@@ -23,6 +23,7 @@ const validationMiddleware = (type: any, value: string | 'body' | 'query' | 'par
         const error: any = e;
         if (error.details) {
           const errorResponse = errorFilterValidator(error.details);
+          console.log("====================>",res)
           return generalResponse(res, null, errorResponse, 'error', true, 400);
         }
         return generalResponse(res, null, 'Something went wrong!', 'error', true, 400);

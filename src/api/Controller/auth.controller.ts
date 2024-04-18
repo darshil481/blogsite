@@ -5,11 +5,14 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt'
 
 export class AuthController{
-  constructor(private authService: AuthService) {}
-
+    private authService: AuthService;
+    constructor() {
+      this.authService = new AuthService();
+    }
     public register = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-
+      console.log("=================>")
       const { first_name, last_name, user_name, email, password, mob_no } = req.body;
+      console.log(first_name, last_name, user_name, email, password, mob_no)
       const user = await this.authService.getUser(user_name);
 
       if (user) {
