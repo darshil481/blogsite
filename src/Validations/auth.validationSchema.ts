@@ -42,3 +42,22 @@ export const RegisterSchema = Joi.object({
   }).options({
     abortEarly: false,
   });
+export const LoginSchema = Joi.object({
+  email: Joi.string()
+  .email()
+  .required()
+  .max(100)
+  .label('Email')
+  .messages({ ...errorMessage, 'string.email': '{#label} must be a valid email' }),
+  password: Joi.string()
+    .min(8)
+    .max(254)
+    .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/)
+    .required()
+    .label('Password')
+    .messages({
+      ...errorMessage,
+      'string.pattern.base':
+      '{#label} must have at least one uppercase character, one lowercase character, one numeric character and one special character',
+    }),
+})

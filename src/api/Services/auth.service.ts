@@ -1,5 +1,5 @@
 import { RegisterUser } from "../../Interface/user.interface";
-const User = require('../../Models/User')
+const { User } = require('../../Models/Schema');
 export class AuthService{
     async getUser(userName:string) {
         try{
@@ -20,6 +20,19 @@ export class AuthService{
             password: userDAta.password,
             mobile_no: userDAta.mob_no
         });
-
+        newUser.save();
+    }
+    async getUserByEmailOrUsername(emailOrUsername: string) {
+        try {
+            const user = await User.findOne({
+                $or: [
+                    { email: emailOrUsername }
+                ]
+            });
+            return user;
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
     }
 }

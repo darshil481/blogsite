@@ -11,7 +11,7 @@
   },
   "include": [
     "src/**/*.ts"
-, "app.ts"  ],
+, "app.ts", "src/Middlewares/multer.middleware"  ],
   "exclude": [
     "node_modules"
   ]
