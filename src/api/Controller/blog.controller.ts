@@ -22,7 +22,6 @@ export class  BlogController{
                 image,
                 status
             }); 
-            console.log("===========================>",blog)
             return generalResponse(res, blog, 'Blog post created successfully', 'success', false, 200);
         } catch (error) {
             // Handle errors

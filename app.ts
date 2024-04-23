@@ -41,6 +41,8 @@ class App {
 
   private initializeMiddlewares() {
     this.app.use(multer().none());
+    this.app.use(express.static('./public'));
+    this.app.use('/uploads', express.static('uploads'));
     this.app.set('view engine', 'ejs');
     this.app.use(express.json({ limit: '50mb' }));
     this.app.use(express.urlencoded({ limit: '50mb', extended: true }));
