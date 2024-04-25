@@ -29,4 +29,12 @@ export class  BlogController{
             return generalResponse(res, null, 'Failed to create blog post', 'error', true, 500);
         }
     }
+    public getBlogList = async(req:Request,res:Response,next:NextFunction) : Promise<void> => {
+        const {search,tag,category} = req.body;
+        const blogListData = {search,tag,category};
+        const blogList = await this.blogService.getAllBlogList(blogListData);
+        return generalResponse(res, blogList, 'Blog List fetch successfully', 'success', false, 200);
+    }
+    
+
 }

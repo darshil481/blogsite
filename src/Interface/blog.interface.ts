@@ -13,3 +13,9 @@ export interface BlogCreationData {
     publishedAt?: Date;
     updatedAt?: Date;
 }
+
+export interface BlogListSchema {
+    search?: string;
+    tag?: string[];
+    category?: string[];
+  }

@@ -15,6 +15,7 @@ class BlogRoute implements Routes{
 
     private initializeRoutes(){
         this.router.post(`${this.path}/create`,validationMiddleware(BlogCreateSchema, 'body'),this.blogController.createOrUpdateBlog);
+        this.router.post(`${this.path}/list`,this.blogController.getBlogList)   
         
     }
     

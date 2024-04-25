@@ -26,8 +26,8 @@ const BlogSchema = new mongoose.Schema({
     slug: { type: String }, // URL slug for the blog post
     summary: { type: String, required: true }, // Summary or excerpt of the blog post content
     content: { type: String, required: true }, // Main content of the blog post
-    tags: [{ type: Number }], // Tags associated with the blog post
-    categories: [{ type: Number }], // Categories the blog post belongs to
+    tags: [{ type: String }], // Tags associated with the blog post
+    categories: [{ type: String }], // Categories the blog post belongs to
     image: [{ type: String }],
     createdAt: { type: Date, default: Date.now },
     publishedAt: { type: Date },
@@ -71,4 +71,4 @@ const BlogLike = mongoose.model("BlogLike",BlogLikeSchema)
 const BlogTag = mongoose.model("Blogtag", BlogTagSchema);
 const BlogCategory = mongoose.model("BlogCategory",BlogCategorySchema)
 
-module.exports = { User,Blog,BlogComment,BlogLike,BlogView };
+module.exports = { User,Blog,BlogComment,BlogLike,BlogView,BlogCategory,BlogTag };
