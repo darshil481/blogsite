@@ -1,6 +1,8 @@
+import { Mongoose } from "mongoose";
+
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     firstName: { type: String,required: true },
     lastName: { type: String,required: true },
     mobile_no: String ,
@@ -17,7 +19,7 @@ const userSchema = new mongoose.Schema({
     verified: { type: Boolean, default:false },
 });
 
-const blogSchema = new mongoose.Schema({
+const BlogSchema = new mongoose.Schema({
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     title: { type: String, required: true },
     metaTitle: String, // Meta title for SEO
@@ -32,8 +34,16 @@ const blogSchema = new mongoose.Schema({
     updatedAt: { type: Date },
     status: { type: String, enum: ['draft', 'published', 'archived'], default: 'draft' },
 })
+const BlogCategorySchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    description: String,
+});
 
-const blogCommentSchema = new mongoose.Schema({
+const BlogTagSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+});
+
+const BlogCommentSchema = new mongoose.Schema({
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, 
     blogId: { type: mongoose.Schema.Types.ObjectId, ref: 'Blog', required: true }, 
     content: { type: String, required: true }, 
@@ -53,10 +63,12 @@ const BlogViewSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now } // Timestamp of when the view occurred
 });
 
-const User = mongoose.model('User', userSchema);
-const Blog = mongoose.model('Blog', blogSchema);
-const BlogComment = mongoose.model('BlogComment', blogCommentSchema);
+const User = mongoose.model('User', UserSchema);
+const Blog = mongoose.model('Blog', BlogSchema);
+const BlogComment = mongoose.model('BlogComment', BlogCommentSchema);
 const BlogView = mongoose.model("BlogView",BlogViewSchema);
 const BlogLike = mongoose.model("BlogLike",BlogLikeSchema)
+const BlogTag = mongoose.model("Blogtag", BlogTagSchema);
+const BlogCategory = mongoose.model("BlogCategory",BlogCategorySchema)
 
-module.exports = { User,Blog,BlogComment,BlogLike,BlogView };
+module.exports = { User,Blog,BlogComment,BlogLike,BlogView,BlogCategory,BlogTag };
